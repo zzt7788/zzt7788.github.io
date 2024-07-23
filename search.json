@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "Teaching/Teaching.html",
+    "href": "Teaching/Teaching.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "华水学堂"
+  },
+  {
+    "objectID": "Research/CRLB/CRLB.html",
+    "href": "Research/CRLB/CRLB.html",
+    "title": "CRLB",
+    "section": "",
+    "text": "CRLB\n\nPhase retrieval\n\nreal case\n\nAWGN \\[I(x)= \\frac{4}{\\sigma^2} \\sum_{k=1}^{m}|&lt;x,f_k&gt;|^2f_kf_k^T\\] Therefore, \\(Cov(\\hat{x})\\geq(I(x))^{-1}\\) and \\(E\\left[||\\hat{x}-x||^2|x\\right]\\geq Tr(I(x)^{-1})\\).\nnon-AWGN\nLet \\(G(r)=\\frac{4}{\\sqrt{2 \\pi}} r^{-\\frac{3}{2}} e^{-\\frac{r}{2}} \\int_{0}^{\\infty} \\frac{t^{2} e^{-\\frac{t^{2}}{2 r}}}{e^{t}+e^{-t}} d t\\) , Then \\[\\mathbb{I}(x)=\\frac{1}{\\sigma^{2}} \\sum_{j=1}^{m}\\left(1-G\\left(\\frac{\\phi_{j}^{2}(x)}{\\sigma^{2}}\\right)\\right) \\nabla_{x} \\phi_{j}(x)\\left(\\nabla_{x} \\phi_{j}(x)\\right)^{T}\\] where \\(\\phi_j(x)=&lt;a_j,x&gt;\\) and \\(\\nabla_{x} \\phi_{j}(x)=a_j\\).\n\ncomplex case\n\nAWGN \\[I(x)= \\frac{4}{\\sigma^2}\\sum_{k=1}^{m}\\Phi_k\\xi\\xi^*\\Phi_k\\] where \\[\\Phi_k=\\varphi_k\\varphi_k^T+J\\varphi_k\\varphi_k^TJ^T\\]and\n\\[\\varphi_k=j(a_k),\n  J=\\begin{bmatrix}O & -I \\\\ I & O \\end{bmatrix}\\]\nnon-AWGN\nLet \\(I_{0}(x)=\\frac{1}{\\pi} \\int_{0}^{\\pi} \\cosh (x \\cos (\\theta)) d \\theta\\), \\(I_1\\) is the derivative of \\(I_0\\). Then\n\\[\nI_{1}(x)=\\frac{1}{\\pi}\\int_{0}^{\\pi}\\sinh (x \\cos(\\theta))cos(\\theta)d\\theta .\n\\]\n\\(G_{2}(r):=r^{-1} e^{-r} \\int_{0}^{\\infty} \\frac{I_{1}^{2}}{I_{0}}(2 \\sqrt{r t}) t e^{-t} d t\\) . Then the Fisher information matrix is given by \\[I(\\xi) = \\frac{4}{\\sigma^2}\n\\sum_{j=1}^m\n\\left(\nG_2\n\\left(\n\\frac{|\\phi_j(x)|^2}{\\sigma^2}\n  \\right)-1\\right)\n\\frac{|\\phi_j(x)|^2}{\\sigma^2}\n\\psi_j(\\xi)\\psi_j^T(\\xi).\\] where \\(\\phi_j(x)=&lt;a_j,x&gt;\\), \\(\\psi_j(\\xi)=\\frac{\\Phi_j\\xi}{|&lt;a_j,x&gt;|}\\).\n\n\nAffine Phase retrieval\n\nreal case\n\nAWGN \\[R^a_x=\\sum^m_{j=1}|a_j^*x+c_j|^2a_j^*a_j\\] \\[I(x)=4 R_x^a/\\sigma^2\\] \\[Cov(\\hat x)\\geq I^{-1}(x)\\]\nnon-AWGN\nLet \\(G(r)=\\frac{4}{\\sqrt{2 \\pi}} r^{-\\frac{3}{2}} e^{-\\frac{r}{2}} \\int_{0}^{\\infty} \\frac{t^{2} e^{-\\frac{t^{2}}{2 r}}}{e^{t}+e^{-t}} d t\\) . Then \\[\\mathbb{I}(x)=\\frac{1}{\\sigma^{2}} \\sum_{j=1}^{m}\\left(1-G\\left(\\frac{\\phi_{j}^{2}(x)}{\\sigma^{2}}\\right)\\right) \\nabla_{x} \\phi_{j}(x)\\left(\\nabla_{x} \\phi_{j}(x)\\right)^{T}\\] where \\(\\phi_j(x)=&lt;a_j,x&gt;+b_j\\) and \\(\\nabla_{x} \\phi_{j}(x)=a_j\\).\n\ncomplex case\n\nAWGN \\[I(x) =\n\\frac{4}{\\sigma^2}\nj(B_j^*(B_jx+b_j))j(B_j^*(B_jx+b_j))^T\n\\]\nnon-AWGN \\[I(\\xi) = \\frac{4}{\\sigma^2}\n\\sum_{j=1}^m\n\\left(\nG_2\n\\left(\n\\frac{|\\phi_j(x)|^2}{\\sigma^2}\n\\right)-1\\right)\n\\frac{|\\phi_j(x)|^2}{\\sigma^2}\n\\psi_j(\\xi)\\psi_j^T(\\xi).\n\\] where \\(\\phi_j(x)=&lt;a_j,x&gt;+b_j\\), \\(\\psi_j(\\xi)=\\frac{\\Phi_j\\xi}{|&lt;a_j,x&gt;|}\\). \\[\n\\nabla_\\xi|\\phi_k(x)|=\n\\frac{\n(\\varphi^T_k\\xi+\\Re(b_k))\\varphi_k\n+(\\varphi^T_kJ\\xi+\\Im(b_k))J^T\\varphi_k\n}\n{\n\\sqrt{\n(\\varphi^T_k\\xi+\\Re(b_k))^2+\n(\\varphi^T_kJ\\xi+\\Im(b_k))^2\n}\n}.\\] \\[=\\frac{\\Phi_k\\xi+[\\Re(b_k)-\\Im(b_k)J]\\varphi_k}\n{|&lt;a_j,x&gt;+b_j|}\\]"
+  },
+  {
+    "objectID": "Notes/HDP/HDP.html",
+    "href": "Notes/HDP/HDP.html",
+    "title": "High dimensional probability notes",
+    "section": "",
+    "text": "\\(\\global \\def {\\P}#1 {\\mathbb{P}#1}\\) \\(\\global \\def {\\mathbb{E}} {\\mathbb{E}}\\)"
+  },
+  {
+    "objectID": "Notes/HDP/HDP.html#preliminaries-on-random-variables",
+    "href": "Notes/HDP/HDP.html#preliminaries-on-random-variables",
+    "title": "High dimensional probability notes",
+    "section": "1. Preliminaries on random variables",
+    "text": "1. Preliminaries on random variables\n\nBasic quantities associated with random variables\n\n\\(\\|X\\|_{L^p}=(\\mathbb{E}|X|^p)^{1/p}\\) is a norm. Thus the space \\(L^p(\\Omega,\\Sigma,\\P)\\) is a Banach space.\n\nSome classical inequalities\n\nIntegral identity. \\(X=\\int_0^{\\infty}\\P \\{X&gt;t\\}dt\\).\nMarkov’s Inequality. \\(\\P \\{X\\geq t\\}\\leq \\frac{\\mathbb{E} X}{t}\\).\nChebyshev’s Inequality. \\(\\P \\{|X-\\mu|\\geq t \\}\\leq \\frac{\\sigma ^2}{t^2}\\).\n\nLimit theorem\n\nStrong law of large number. $S_n/n , a.s. $\nCentral limit theorem.\n\\(Z_n:=\\frac{1}{\\sigma / \\sqrt{n}} \\sum_{i=1}^n(X_i-\\mu)\\rightarrow N(0,1)\\) in distribution.\nPoisson Limit Theorem \\(S_n\\rightarrow Pois(\\lambda)\\) in distribution."
+  },
+  {
+    "objectID": "Notes/HDP/HDP.html#concentration-of-sums-of-independent-random-variables",
+    "href": "Notes/HDP/HDP.html#concentration-of-sums-of-independent-random-variables",
+    "title": "High dimensional probability notes",
+    "section": "2. Concentration of sums of independent random variables",
+    "text": "2. Concentration of sums of independent random variables\n\nWhy concentration inequalities?\n\nTails of the normal distribution. \\((\\frac{1}{t}-\\frac{1}{t^3})\\cdot \\frac{1}{\\sqrt{2\\pi}}e^{-t^2/2}\n\\leq \\P \\{g\\geq t\\}\\leq \\min\n\\{1/2,\\frac{1}{t\\sqrt{2\\pi}} \\}e^{-t^2/2}\\).\n\nHoeffding’s inequality\n\nHoeffding’s inequality.\n\\(X_i\\) symmetric Bernoulli distribution, then for \\(t\\geq 0\\), we have \\[\\P \\{\\sum_{i=1}^n a_i X_i\\geq t \\}\\leq \\exp(-\\frac{t^2}{2\\|a\\|^2})\\]\nHoeffding’s inequality two sides.\nHoeffding’s inequality for general bounded random variables.\n\nChernoff’s inequality\n\nChernoff’s inequality\n\\(X_i\\) be independent Bernoulli r.v. , \\(\\mu=\\mathbb{E} S_n\\), then for \\(t&gt;\\mu\\), we have \\[\\P \\{S_n\\geq t\\}\\leq\ne^{-\\mu} (e\\mu /t)^t.\\]\n\nApplication: degrees of random graphs\nSub-Gaussian distributions\n\nSub-Gaussian properties\n\nThe tails of \\(X\\) satisfy \\[\\P\\{|X|\\geq t\\}\\leq 2 \\exp(-t^2/K_1^2).\\]\nThe moments of X satisfy \\[\\|X\\|_{L^p}\\leq K_2\\sqrt{p}, \\,\\,p\\geq 1.\\]\nThe MGF of \\(X^2\\) satisfies \\[\\mathbb{E} \\exp (\\lambda^2 X^2)\\leq \\exp (K_3^2\\lambda^2), \\,\\, |\\lambda|\\leq 1/K_3.\\]\nThe MGF of \\(X^2\\) is bounded at some point, \\[\\mathbb{E} \\exp(X^2/K_4^2)\\leq 2. \\]\nIf \\(\\mathbb{E} X =0\\), \\[\\mathbb{E} \\exp (\\lambda X)\\leq (K_5^2\\lambda^2).\\]\n\nSub-Gaussian norm \\[\\|X\\|_{\\psi_2}:=\\inf \\{t&gt;0:\n\\mathbb{E} \\exp(X^2/t^2)\\leq 2.\\]\n\nGenearl Hoeffding’s and Khintchine’s inequalities\n\nSums of independent sub-gaussians Let \\(X_i\\) be independent, mean zero, sub-gaussian r.v. Then \\(S_n\\) is also sub-gaussian and \\[\\left\\| \\sum ^{n}_{i=1}X_i\n\\right\\|_{\\psi_{2}}^{2}\\leq C\\sum ^{n}_{i=1}\\left\\| X_{i}\\right\\| _{\\psi_{2}}^{2}.\\]\nGeneral Hoeffding’s inequality 1. \\[\n\\P \\left\\{ \\left| \\sum ^{n}_{i=1}X_{i}\\right| \\geq t\\right\\} \\leq 2\\exp \\left(\n-\\dfrac{ct^{2}}{\\sum ^{n}_{i=1}\\left\\| X_{i}\\right\\| _{\\psi_{2}}^{2}}\\right).\n\\]\nGeneral Hoeffding’s inequality 2. \\[\n\\P\\left\\{ \\left| \\sum ^{n}_{i=1}a_i X_{i}\\right| \\geq t\\right\\} \\leq 2\\exp \\left(\n-\\dfrac{ct^{2}}{K^2\\|a\\|^2}\\right)\n\\] where \\(K=\\max_i \\|X_i\\|_{\\psi_2}\\).\nCentering If \\(X\\) is a sub-gaussian r.v. then \\(X-\\mathbb{E} X\\) is sub-gaussian, too, and \\[\\pnt{X-EX}\\leq C \\pnt {X}.\\]\n\nSub-exponentional distribution\n\nProperties\n\nThe tails of X satisfy \\[\\P \\{|X|\\geq t\\}\\leq 2 \\exp (-t/K_1).\\]\nThe moments of X satisfy \\[\\norm {X}_{L^p}\\leq K_2p.\\]\n\nThe MGF of \\(|X|\\) satisfy\n\\[\\mathbb{E} \\exp (\\lambda |X|)\\leq \\exp (K_3 \\lambda), 0\\leq \\lambda \\leq 1/K_3.\\]\nThe MGF of \\(|X|\\) is bounded at some point, \\[\\mathbb{E}\\exp (|X|/K_4)\\leq 2.\\]\nIf X is mean zero, then \\[\\mathbb{E} \\exp (\\lambda X)\\leq \\exp(K_5^2\\lambda ^2), \\,\\, |\\lambda|\\leq 1/K_5.\\]\n\nSub-exponential norm \\[\\pno {X}=\\inf \\{t&gt;0:\\mathbb{E} \\exp(|X|/t)\\leq 2\\}.\\]\nSub-exponential is sub-gaussian squared\n\\[\\pno{X^2}=\\pnt{X}^2.\\]\nProduct of sub-gaussians is sub-exponential \\[\\pno{XY}\\leq \\pnt{X} \\pnt {Y}.\\]\nCentering \\[\\pno{X-\\mathbb{E} X}\\leq C\\pno{X}.\\]\nOrlicz spaces\n\nA function \\(\\psi : [0,\\infty)\\rightarrow [0,\\infty)\\) is called Orlicz function if \\(\\psi\\) is convex, increasing, and satisfies \\[\\psi(0)=0,\\quad \\psi(x)\\rightarrow \\infty \\text{\\,as\\,} x\\rightarrow \\infty. \\]\nOrlicz norm and Orlicz space \\[\\norm {X}_\\psi := \\inf\\{t&gt;0: \\mathbb{E}\n\\psi (|X|/t)\\leq 1\\}.\\] \\[L_\\psi :=\\{X:\\norm{X}_\\psi \\leq \\infty\\}.\\]\n\n\nBernstein’s inequality\n\nBernstein’s inequality 1\n\\(X_i\\) independent, mean zero, sub-exponential r.v. Then \\[\\P \\{|\\sum_{i=1}^N X_i|\\geq t\\}\\leq 2 \\exp \\left [-c \\min \\left(\\frac{t^2}{\\sum_{i=1}^N\\pno{X_i}^2},\\frac{t}{\\max_i \\pno{X_i}}\\right)\\right].\\]\nBernstein’s inequality 2\n\\[ \\P \\{|\\sum_{i=1}^N a_i X_i|\\geq t\\}\\leq 2 \\exp    \\left   [-c \\min \\left(\n\\frac{t^2}{K^2 \\norm{a}^2},\n\\frac{t}{K}\\right)N\\right],\\] where \\(K=\\max_i \\pno{X_i}\\).\nBernstein’s inequality 3\nIf \\(|X_i|\\leq K\\), then \\[\\P\\{|\\sum_{i=1}^N X_i|\\geq t\\}\\leq 2 \\exp\\left( -\\frac{t^2/2}{\\sigma ^2 +Kt/3}\\right).\\]"
+  },
+  {
+    "objectID": "Notes/HDP/HDP.html#random-vectors-in-high-dimensions",
+    "href": "Notes/HDP/HDP.html#random-vectors-in-high-dimensions",
+    "title": "High dimensional probability notes",
+    "section": "3. Random vectors in high dimensions",
+    "text": "3. Random vectors in high dimensions\n\nConcentration of the norm\nLet \\(X=(X_1,\\ldots,X_n)\\) be a random vector with independent, sub-Gaussian coordinate \\(X_i\\) that satisfy \\(\\mathbb{E} X_i^2=1\\). Then\n\\[\n\\norm{\\norm{X}_2-\\sqrt{n}}_{\\psi_2}\\leq CK^2,\n\\] where \\(K=\\max_i\\pnt{X_i}\\) and \\(C\\) is an absolute constant.\nCovariance matrices and principal component analysis \\[\n\\operatorname{Cov} =\\mathbb{E} (X-\\mu)(X-\\mu)^T\n\\]\nIsotropy\n\nDefinition \\[\n\\Sigma(X) = \\mathbb{E} X X^T =I_n.\n\\]\nCharacterization of isotropy\nA random vector \\(X\\) in \\(\\R ^n\\) is isotropic if and only if \\[\n\\mathbb{E} \\inn{X}{x}^2=\\norm{X}_2^2, \\text{ for all } x \\in \\R ^n\n\\]\nLet \\(X\\) be an isotropic random vector in\\(\\R ^n\\). Then \\[\n\\mathbb{E} \\norm{X}_2^2 = n.\n\\] Moreover, if \\(X\\) and \\(Y\\) are two independent isotropic random vectors, then \\[\n\\mathbb{E} \\inn{X}{Y}^2 = n.\n\\]\n\nExamples of high-dimensional distributions\n\nSpherical and Bernoulli distributions"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "Jul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2020\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html#notes",
+    "href": "index.html#notes",
+    "title": "",
+    "section": "",
+    "text": "Jul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2020\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html#research",
+    "href": "index.html#research",
+    "title": "",
+    "section": "Research",
+    "text": "Research\n\n\n\n\n\n\n\nGPA\n\n\n\nJul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\nCRLB\n\n\n\nOct 8, 2021\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html#others",
+    "href": "index.html#others",
+    "title": "",
+    "section": "Others",
+    "text": "Others\n\n\n\n\n\n\n\nTEST\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Zhuang Zhitao",
+    "section": "",
+    "text": "School of Mathematics and Statistics\nNorth China University of Water Resources and Electric Power"
+  },
+  {
+    "objectID": "Notes/excerpt/index.html",
+    "href": "Notes/excerpt/index.html",
+    "title": "Excerpts",
+    "section": "",
+    "text": "We then equate the first derivative to zero and solve for the minimum point. 然后，我们将一阶导数等于零并求解最小点。"
+  },
+  {
+    "objectID": "Others/test/TEST.html",
+    "href": "Others/test/TEST.html",
+    "title": "TEST",
+    "section": "",
+    "text": "TESTO"
+  },
+  {
+    "objectID": "Research/test/TEST.html",
+    "href": "Research/test/TEST.html",
+    "title": "GPA",
+    "section": "",
+    "text": "TEST\nBalan and Wang (2015)\n\n\n\n\nReferences\n\nBalan, Radu, and Yang Wang. 2015. “Invertibility and Robustness of Phaseless Reconstruction.” Applied and Computational Harmonic Analysis 38 (3): 469–88. https://doi.org/10.1016/j.acha.2014.07.003."
+  }
+]
