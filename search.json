@@ -46,14 +46,14 @@
     "href": "index.html",
     "title": "",
     "section": "",
-    "text": "Jul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2020\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Sep 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nJul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2020\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html#notes",
     "href": "index.html#notes",
     "title": "",
     "section": "",
-    "text": "Jul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2020\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Sep 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nJul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2020\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html#research",
@@ -96,5 +96,12 @@
     "title": "GPA",
     "section": "",
     "text": "TEST\nBalan and Wang (2015)\n\n\n\n\nReferences\n\nBalan, Radu, and Yang Wang. 2015. “Invertibility and Robustness of Phaseless Reconstruction.” Applied and Computational Harmonic Analysis 38 (3): 469–88. https://doi.org/10.1016/j.acha.2014.07.003."
+  },
+  {
+    "objectID": "Notes/Max/max.html",
+    "href": "Notes/Max/max.html",
+    "title": "Distribution of Maximum Eigenvalues",
+    "section": "",
+    "text": "Let \\(X\\) be a \\(n\\times n\\) matrix with its elements are random variables distributed according to \\(N(\\mu, \\sigma ^2)\\). Define \\(W=X^TX/n\\). We want to know the distribution of the maximum eigenvalue of \\(W\\). First, define a function to generate \\(W\\) and compute its eigenvalues:\n\nlamda1 &lt;- function(n)\n{\n  X &lt;- matrix(rnorm(n^2, mean = 0.5, sd=1) ,nrow=n)\nW &lt;- t(X)%*%X/n\nreturn(eigen(W, only.values = TRUE, symmetric = TRUE))\n}\n\nSecond, find the maximum eigenvalues and make a histogram to illustrate the distribution.\n\nn &lt;- 100\niter &lt;- 1000\n\neigw &lt;- matrix(nrow = iter, ncol = n)\nfor (i in 1:iter) eigw[i,] &lt;- lamda1(n)$values\n\nmaxlamda &lt;- apply(eigw, 1, sum)\nhist(maxlamda, breaks = seq(min(maxlamda), max(maxlamda), length.out = 30))"
   }
 ]
