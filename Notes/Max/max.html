@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="zzt">
-<meta name="dcterms.date" content="2024-09-05">
 
 <title>Distribution of Maximum Eigenvalues</title>
 <style>
@@ -197,12 +196,6 @@ window.Quarto = {
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 5, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -214,27 +207,55 @@ window.Quarto = {
 
 <p>Let <span class="math inline">\(X\)</span> be a <span class="math inline">\(n\times n\)</span> matrix with its elements are random variables distributed according to <span class="math inline">\(N(\mu, \sigma ^2)\)</span>. Define <span class="math inline">\(W=X^TX/n\)</span>. We want to know the distribution of the maximum eigenvalue of <span class="math inline">\(W\)</span>. First, define a function to generate <span class="math inline">\(W\)</span> and compute its eigenvalues:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>lamda1 <span class="ot">&lt;-</span> <span class="cf">function</span>(n)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>lambda012 <span class="ot">&lt;-</span> <span class="cf">function</span>(n,u,s)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">^</span><span class="dv">2</span>, <span class="at">mean =</span> <span class="fl">0.5</span>, <span class="at">sd=</span><span class="dv">1</span>) ,<span class="at">nrow=</span>n)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">t</span>(X)<span class="sc">%*%</span>X<span class="sc">/</span>n</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">eigen</span>(W, <span class="at">only.values =</span> <span class="cn">TRUE</span>, <span class="at">symmetric =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">^</span><span class="dv">2</span>, <span class="at">mean =</span> u, <span class="at">sd=</span>s) ,<span class="at">nrow=</span>n)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  W <span class="ot">&lt;-</span> <span class="fu">t</span>(X)<span class="sc">%*%</span>X<span class="sc">/</span>n</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  maxeig <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">eigen</span>(W, <span class="at">only.values =</span> <span class="cn">TRUE</span>, <span class="at">symmetric =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>values)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  Wi <span class="ot">&lt;-</span> <span class="fu">apply</span>(W,<span class="dv">1</span>,sum)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  lambda1 <span class="ot">&lt;-</span> (<span class="fu">sum</span>(Wi)<span class="sc">/</span>n)<span class="sc">+</span>s<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  lambda2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(Wi<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">sum</span>(Wi)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  error1 <span class="ot">&lt;-</span> (lambda1<span class="sc">-</span>maxeig)<span class="sc">/</span>maxeig</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  error2 <span class="ot">&lt;-</span> (lambda2<span class="sc">-</span>maxeig)<span class="sc">/</span>maxeig</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  lambda012 <span class="ot">&lt;-</span> <span class="fu">c</span>(maxeig,lambda1,lambda2,error1,error2)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Second, find the maximum eigenvalues and make a histogram to illustrate the distribution.</p>
+<p>Make a histogram to illustrate the distribution of the maximum eigenvalue.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>iter <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>eigw <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> iter, <span class="at">ncol =</span> n)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>iter) eigw[i,] <span class="ot">&lt;-</span> <span class="fu">lamda1</span>(n)<span class="sc">$</span>values</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>maxlamda <span class="ot">&lt;-</span> <span class="fu">apply</span>(eigw, <span class="dv">1</span>, sum)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(maxlamda, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fu">min</span>(maxlamda), <span class="fu">max</span>(maxlamda), <span class="at">length.out =</span> <span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">=</span> <span class="fl">0.5</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>iter <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>eigw <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> iter, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>iter) eigw[i,] <span class="ot">&lt;-</span> <span class="fu">lambda012</span>(n,u,s)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>br <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(eigw[,<span class="dv">1</span>]), <span class="fu">max</span>(eigw[,<span class="dv">1</span>]), <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(eigw[,<span class="dv">1</span>], <span class="at">breaks =</span> br, <span class="at">probability =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(eigw[,<span class="dv">1</span>]),<span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="max_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="max_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let <span class="math inline">\(W_i\)</span> is the summation of ith row of <span class="math inline">\(W\)</span>. Two different estimations of maximum eigenvalue are <span class="math inline">\(\lambda_1=  \frac{1}{n}\sum_{i} Wi+\sigma^2\)</span> and <span class="math inline">\(\lambda_2=\frac{\sum_{i}W_i^2}{\sum_{i}W_i}\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">c</span>(eigw[,<span class="dv">4</span>],eigw[,<span class="dv">5</span>])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"lambda1"</span>,iter),<span class="fu">rep</span>(<span class="st">"lambda2"</span>,iter))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">rep</span>((<span class="dv">1</span><span class="sc">:</span>iter),<span class="dv">2</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xx,error,index)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x=</span>xx,<span class="at">y=</span>error,<span class="at">color=</span>index))<span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="max_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
