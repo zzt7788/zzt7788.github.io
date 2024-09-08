@@ -255,7 +255,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>We use the quotient <span class="math inline">\(\frac{&lt;\mathbf{1},W^{k}\mathbf{1}&gt;}{&lt;\mathbf{1},W^{k-1}\mathbf{1}&gt;}\)</span> to estimate the maximum eigenvalues. The errors between them and the real eigenvalues are showed as following figure where we take <span class="math inline">\(k=1,2,5\)</span> and adjust the estimation when <span class="math inline">\(k=1\)</span> with shifting <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Let <span class="math inline">\(\mathbf{1}=(1,1,...,1)^T\)</span>. We use the quotient <span class="math inline">\(\frac{&lt;\mathbf{1},W^{k}\mathbf{1}&gt;}{&lt;\mathbf{1},W^{k-1}\mathbf{1}&gt;}\)</span> to estimate the maximum eigenvalues. The errors between them and the real eigenvalues are showed in the following figure where we take <span class="math inline">\(k=1,2,5\)</span> and adjust the estimation when <span class="math inline">\(k=1\)</span> with shifting <span class="math inline">\(\sigma^2\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">c</span>(eigw[,<span class="dv">4</span>],eigw[,<span class="dv">5</span>], eigw[,<span class="dv">6</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"lambda1"</span>,iter),<span class="fu">rep</span>(<span class="st">"lambda2"</span>,iter),<span class="fu">rep</span>(<span class="st">"lambdak"</span>,iter))</span>
