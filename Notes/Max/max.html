@@ -216,17 +216,22 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>lambda012 <span class="ot">&lt;-</span> <span class="cf">function</span>(n,u,s)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">^</span><span class="dv">2</span>, <span class="at">mean =</span> u, <span class="at">sd=</span>s) ,<span class="at">nrow=</span>n)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  W <span class="ot">&lt;-</span> <span class="fu">t</span>(X)<span class="sc">%*%</span>X<span class="sc">/</span>n</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  maxeig <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">eigen</span>(W, <span class="at">only.values =</span> <span class="cn">TRUE</span>, <span class="at">symmetric =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>values)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  Wi <span class="ot">&lt;-</span> <span class="fu">apply</span>(W,<span class="dv">1</span>,sum)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  lambda1 <span class="ot">&lt;-</span> (<span class="fu">sum</span>(Wi)<span class="sc">/</span>n)<span class="sc">+</span>s<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  lambda2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(Wi<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">sum</span>(Wi)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  error1 <span class="ot">&lt;-</span> (lambda1<span class="sc">-</span>maxeig)<span class="sc">/</span>maxeig</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  error2 <span class="ot">&lt;-</span> (lambda2<span class="sc">-</span>maxeig)<span class="sc">/</span>maxeig</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  lambda012 <span class="ot">&lt;-</span> <span class="fu">c</span>(maxeig,lambda1,lambda2,error1,error2)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">^</span><span class="dv">2</span>, <span class="at">mean =</span> u, <span class="at">sd=</span>s) ,<span class="at">nrow=</span>n)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  W <span class="ot">&lt;-</span> <span class="fu">t</span>(X)<span class="sc">%*%</span>X<span class="sc">/</span>n</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  maxeig <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">eigen</span>(W, <span class="at">only.values =</span> <span class="cn">TRUE</span>, <span class="at">symmetric =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>values)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  Wi <span class="ot">&lt;-</span> <span class="fu">apply</span>(W,<span class="dv">1</span>,sum)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  lambda1 <span class="ot">&lt;-</span> (<span class="fu">sum</span>(Wi)<span class="sc">/</span>n)<span class="sc">+</span>s<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  lambda2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(Wi<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">sum</span>(Wi)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  stepk <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">rep</span>(<span class="dv">1</span>,n)) <span class="sc">%*%</span>  ((W<span class="sc">%^%</span>k) <span class="sc">%*%</span> <span class="fu">rep</span>(<span class="dv">1</span>,n))  </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  stepk_ <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">rep</span>(<span class="dv">1</span>,n)) <span class="sc">%*%</span>  ((W<span class="sc">%^%</span>(k<span class="dv">-1</span>)) <span class="sc">%*%</span> <span class="fu">rep</span>(<span class="dv">1</span>,n))  </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  lambdak <span class="ot">&lt;-</span> stepk<span class="sc">/</span>stepk_</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  error1 <span class="ot">&lt;-</span> (lambda1<span class="sc">-</span>maxeig)<span class="sc">/</span>maxeig</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  error2 <span class="ot">&lt;-</span> (lambda2<span class="sc">-</span>maxeig)<span class="sc">/</span>maxeig</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  errork <span class="ot">&lt;-</span> (lambdak<span class="sc">-</span>maxeig)<span class="sc">/</span>maxeig</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  lambda012 <span class="ot">&lt;-</span> <span class="fu">c</span>(maxeig,lambda1,lambda2,error1,error2,errork)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Make a histogram to illustrate the distribution of the maximum eigenvalue.</p>
 <div class="cell">
@@ -235,7 +240,7 @@ window.Quarto = {
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">=</span> <span class="dv">2</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>iter <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>eigw <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> iter, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>eigw <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> iter, <span class="at">ncol =</span> <span class="dv">6</span>)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>iter) eigw[i,] <span class="ot">&lt;-</span> <span class="fu">lambda012</span>(n,u,s)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -250,11 +255,11 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Let <span class="math inline">\(W_i\)</span> is the summation of ith row of <span class="math inline">\(W\)</span>. Two different estimations of maximum eigenvalue are <span class="math inline">\(\lambda_1=  \frac{1}{n}\sum_{i} Wi+\sigma^2\)</span> and <span class="math inline">\(\lambda_2=\frac{\sum_{i}W_i^2}{\sum_{i}W_i}\)</span>. The errors between them and the real eigenvalues are showed as following.</p>
+<p>We use the quotient <span class="math inline">\(\frac{&lt;\mathbf{1},W^{k}\mathbf{1}&gt;}{&lt;\mathbf{1},W^{k-1}\mathbf{1}&gt;}\)</span> to estimate the maximum eigenvalues. The errors between them and the real eigenvalues are showed as following figure where we take <span class="math inline">\(k=1,2,5\)</span> and adjust the estimation when <span class="math inline">\(k=1\)</span> with shifting <span class="math inline">\(\sigma^2\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">c</span>(eigw[,<span class="dv">4</span>],eigw[,<span class="dv">5</span>])</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"lambda1"</span>,iter),<span class="fu">rep</span>(<span class="st">"lambda2"</span>,iter))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">rep</span>((<span class="dv">1</span><span class="sc">:</span>iter),<span class="dv">2</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">c</span>(eigw[,<span class="dv">4</span>],eigw[,<span class="dv">5</span>], eigw[,<span class="dv">6</span>])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"lambda1"</span>,iter),<span class="fu">rep</span>(<span class="st">"lambda2"</span>,iter),<span class="fu">rep</span>(<span class="st">"lambdak"</span>,iter))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">rep</span>((<span class="dv">1</span><span class="sc">:</span>iter),<span class="dv">3</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xx,error,index)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x=</span>xx,<span class="at">y=</span>error,<span class="at">color=</span>index))<span class="sc">+</span></span>
