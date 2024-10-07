@@ -46,14 +46,14 @@
     "href": "index.html",
     "title": "",
     "section": "",
-    "text": "Sep 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nJul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2020\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Sep 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2020\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html#notes",
     "href": "index.html#notes",
     "title": "",
     "section": "",
-    "text": "Sep 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nJul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2020\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Sep 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJul 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOct 14, 2020\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html#research",
@@ -102,6 +102,6 @@
     "href": "Notes/Max/max.html",
     "title": "Distribution of Maximum Eigenvalues",
     "section": "",
-    "text": "Let \\(X\\) be a \\(n\\times n\\) matrix with its elements are random variables distributed according to \\(N(\\mu, \\sigma ^2)\\). Define \\(W=X^TX/n\\). We want to know the distribution of the maximum eigenvalue of \\(W\\). First, define a function to generate \\(W\\) and compute its eigenvalues:\n\nlambda012 &lt;- function(n,u,s)\n{\n  k &lt;- 5\n  X &lt;- matrix(rnorm(n^2, mean = u, sd=s) ,nrow=n)\n  W &lt;- t(X)%*%X/n\n  maxeig &lt;- max(eigen(W, only.values = TRUE, symmetric = TRUE)$values)\n  Wi &lt;- apply(W,1,sum)\n  lambda1 &lt;- (sum(Wi)/n)+s^2\n  lambda2 &lt;- sum(Wi^2)/sum(Wi)\n  stepk &lt;- t(rep(1,n)) %*%  ((W%^%k) %*% rep(1,n))  \n  stepk_ &lt;- t(rep(1,n)) %*%  ((W%^%(k-1)) %*% rep(1,n))  \n  lambdak &lt;- stepk/stepk_\n  \n  error1 &lt;- (lambda1-maxeig)/maxeig\n  error2 &lt;- (lambda2-maxeig)/maxeig\n  errork &lt;- (lambdak-maxeig)/maxeig\n  lambda012 &lt;- c(maxeig,lambda1,lambda2,error1,error2,errork)\n}\n\nMake a histogram to illustrate the distribution of the maximum eigenvalue.\n\nn = 100\nu = 0.5\ns = 2\niter &lt;- 1000\n\neigw &lt;- matrix(nrow = iter, ncol = 6)\nfor (i in 1:iter) eigw[i,] &lt;- lambda012(n,u,s)\n\n\nbr &lt;- seq(min(eigw[,1]), max(eigw[,1]), length.out = 30)\nhist(eigw[,1], breaks = br, probability = TRUE)\nlines(density(eigw[,1]),col=\"red\")\n\n\n\n\n\n\n\n\nLet \\(\\mathbf{1}=(1,1,...,1)^T\\). We use the quotient \\(\\frac{&lt;\\mathbf{1},W^{k}\\mathbf{1}&gt;}{&lt;\\mathbf{1},W^{k-1}\\mathbf{1}&gt;}\\) to estimate the maximum eigenvalues. The errors between them and the real eigenvalues are showed in the following figure where we take \\(k=1,2,5\\) and adjust the estimation when \\(k=1\\) with shifting \\(\\sigma^2\\).\n\nerror &lt;- c(eigw[,4],eigw[,5], eigw[,6])\nindex &lt;- c(rep(\"lambda1\",iter),rep(\"lambda2\",iter),rep(\"lambdak\",iter))\nxx &lt;- rep((1:iter),3)\ndf &lt;- data.frame(xx,error,index)\n\nggplot(df, aes(x=xx,y=error,color=index))+\n  geom_point()"
+    "text": "Let \\(X\\) be a \\(n\\times n\\) matrix with its elements are random variables distributed according to \\(N(\\mu, \\sigma ^2)\\). Define \\(W=X^TX/n\\). We want to know the distribution of the maximum eigenvalue of \\(W\\). First, define a function to generate \\(W\\) and compute its eigenvalues:\n\nlambda012 &lt;- function(n,u,s)\n{\n  k &lt;- 5\n  X &lt;- matrix(rnorm(n^2, mean = u, sd=s) ,nrow=n)\n  W &lt;- t(X)%*%X/n\n  maxeig &lt;- max(eigen(W, only.values = TRUE, symmetric = TRUE)$values)\n  Wi &lt;- apply(W,1,sum)\n  lambda1 &lt;- (sum(Wi)/n)+s^2\n  lambda2 &lt;- sum(Wi^2)/sum(Wi)\n  stepk &lt;- t(rep(1,n)) %*%  ((W%^%k) %*% rep(1,n))  \n  stepk_ &lt;- t(rep(1,n)) %*%  ((W%^%(k-1)) %*% rep(1,n))  \n  lambdak &lt;- stepk/stepk_\n  \n  error1 &lt;- (lambda1-maxeig)/maxeig\n  error2 &lt;- (lambda2-maxeig)/maxeig\n  errork &lt;- (lambdak-maxeig)/maxeig\n  lambda012 &lt;- c(maxeig,lambda1,lambda2,error1,error2,errork)\n}\n\nMake a histogram to illustrate the distribution of the maximum eigenvalue.\n\nn = 100\nu = 0.5\ns = 2\niter &lt;- 1000\n\neigw &lt;- matrix(nrow = iter, ncol = 6)\nfor (i in 1:iter) eigw[i,] &lt;- lambda012(n,u,s)\n\n\nbr &lt;- seq(min(eigw[,1]), max(eigw[,1]), length.out = 30)\nhist(eigw[,1], breaks = br, probability = TRUE)\nlines(density(eigw[,1]),col=\"red\")\n\n\n\n\n\n\n\n\nThe Q-Q Plot\n\nqqnorm(eigw[,1]);qqline(eigw[,1],col=2)\n\n\n\n\n\n\n\n\nLet \\(\\mathbf{1}=(1,1,...,1)^T\\). We use the quotient \\(\\frac{&lt;\\mathbf{1},W^{k}\\mathbf{1}&gt;}{&lt;\\mathbf{1},W^{k-1}\\mathbf{1}&gt;}\\) to estimate the maximum eigenvalues. The errors between them and the real eigenvalues are showed in the following figure where we take \\(k=1,2,5\\) and adjust the estimation when \\(k=1\\) with shifting \\(\\sigma^2\\).\n\nerror &lt;- c(eigw[,4],eigw[,5], eigw[,6])\nindex &lt;- c(rep(\"lambda1\",iter),rep(\"lambda2\",iter),rep(\"lambdak\",iter))\nxx &lt;- rep((1:iter),3)\ndf &lt;- data.frame(xx,error,index)\n\nggplot(df, aes(x=xx,y=error,color=index))+\n  geom_point()"
   }
 ]

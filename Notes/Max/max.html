@@ -255,19 +255,30 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Let <span class="math inline">\(\mathbf{1}=(1,1,...,1)^T\)</span>. We use the quotient <span class="math inline">\(\frac{&lt;\mathbf{1},W^{k}\mathbf{1}&gt;}{&lt;\mathbf{1},W^{k-1}\mathbf{1}&gt;}\)</span> to estimate the maximum eigenvalues. The errors between them and the real eigenvalues are showed in the following figure where we take <span class="math inline">\(k=1,2,5\)</span> and adjust the estimation when <span class="math inline">\(k=1\)</span> with shifting <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>The Q-Q Plot</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">c</span>(eigw[,<span class="dv">4</span>],eigw[,<span class="dv">5</span>], eigw[,<span class="dv">6</span>])</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"lambda1"</span>,iter),<span class="fu">rep</span>(<span class="st">"lambda2"</span>,iter),<span class="fu">rep</span>(<span class="st">"lambdak"</span>,iter))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">rep</span>((<span class="dv">1</span><span class="sc">:</span>iter),<span class="dv">3</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xx,error,index)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x=</span>xx,<span class="at">y=</span>error,<span class="at">color=</span>index))<span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(eigw[,<span class="dv">1</span>]);<span class="fu">qqline</span>(eigw[,<span class="dv">1</span>],<span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="max_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let <span class="math inline">\(\mathbf{1}=(1,1,...,1)^T\)</span>. We use the quotient <span class="math inline">\(\frac{&lt;\mathbf{1},W^{k}\mathbf{1}&gt;}{&lt;\mathbf{1},W^{k-1}\mathbf{1}&gt;}\)</span> to estimate the maximum eigenvalues. The errors between them and the real eigenvalues are showed in the following figure where we take <span class="math inline">\(k=1,2,5\)</span> and adjust the estimation when <span class="math inline">\(k=1\)</span> with shifting <span class="math inline">\(\sigma^2\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">c</span>(eigw[,<span class="dv">4</span>],eigw[,<span class="dv">5</span>], eigw[,<span class="dv">6</span>])</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"lambda1"</span>,iter),<span class="fu">rep</span>(<span class="st">"lambda2"</span>,iter),<span class="fu">rep</span>(<span class="st">"lambdak"</span>,iter))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">rep</span>((<span class="dv">1</span><span class="sc">:</span>iter),<span class="dv">3</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xx,error,index)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x=</span>xx,<span class="at">y=</span>error,<span class="at">color=</span>index))<span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="max_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
